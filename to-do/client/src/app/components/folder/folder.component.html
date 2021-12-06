@@ -1,0 +1,47 @@
+<h1 style="text-align: center">Folders</h1>
+<div class="container">
+  <div class="row justify-content-md-center">
+    <div class="col col-lg-4">
+      <table class="table table-striped">
+        <tbody>
+          <tr *ngFor="let folder of folders; let i = index">
+            <td>
+              {{ folder.title }}
+            </td>
+            <td
+              style="color: lightseagreen; font-weight: bold; cursor: pointer"
+              (click)="listTodos(folder.id)"
+            >
+              View Items
+            </td>
+            <td
+              class="col"
+              style="color: lightcoral; font-weight: bold; cursor: pointer"
+              (click)="delete(folder.id)"
+            >
+              Remove
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="input-group mb-4">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="New Folder"
+          aria-label="New Folder"
+          aria-describedby="button-addon2"
+          [(ngModel)]="newFolder"
+        />
+        <button
+          class="btn btn-outline-secondary"
+          type="button"
+          id="button-addon2"
+          (click)="saveFolder()"
+        >
+          Add
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

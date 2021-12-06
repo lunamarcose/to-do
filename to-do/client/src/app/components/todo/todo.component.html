@@ -1,0 +1,97 @@
+<h1 style="text-align: center">To-Do List</h1>
+<div class="container">
+  <div class="row justify-content-md-center">
+    <div class="col col-lg-4">
+      <table class="table table-striped">
+        <tbody>
+          <tr *ngFor="let todo of todos; let i = index">
+            <td>
+              <div class="form-check">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  value=""
+                  id="flexCheckChecked"
+                  [checked]="todo.completed"
+                  (click)="updateStatus(todo.id)"
+                />
+                <label class="form-check-label" for="flexCheckChecked">
+                  {{ todo.title }}
+                </label>
+              </div>
+            </td>
+            <td
+              style="color: lightseagreen; font-weight: bold; cursor: pointer"
+              (click)="openModal(editProfileModal, todo)"
+            >
+              Edit
+            </td>
+            <td
+              style="color: lightcoral; font-weight: bold; cursor: pointer"
+              (click)="delete(todo.id)"
+            >
+              Delete
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="input-group mb-4">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="New Task"
+          aria-label="New Task"
+          aria-describedby="button-addon2"
+          [(ngModel)]="newTodo"
+        />
+        <button
+          class="btn btn-outline-secondary"
+          type="button"
+          id="button-addon2"
+          (click)="saveTodo()"
+        >
+          Add
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #editProfileModal let-modal>
+  <div class="modal-header">
+    <h5 class="modal-title" id="editProfileLabel">Editing Task</h5>
+    <button
+      type="button"
+      class="close"
+      (click)="modal.dismiss()"
+      aria-label="Close"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="editProfileForm" (ngSubmit)="onSubmit()">
+      <div class="form-group row">
+        <label for="name" class="col-sm-4 col-form-label">Task</label>
+        <div class="col-sm-8">
+          <input
+            type="text"
+            class="form-control"
+            formControlName="name"
+            id="name"
+          />
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-secondary"
+          (click)="modal.dismiss()"
+        >
+          Cancel
+        </button>
+        <button type="submit" class="btn btn-primary">Save</button>
+      </div>
+    </form>
+  </div>
+</ng-template>
